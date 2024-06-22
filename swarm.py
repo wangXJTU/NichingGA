@@ -250,8 +250,9 @@ class ABC(fitness):
                     self.employed[i] = np.random.randint(self.low, self.high, size=self.dim)
             # Memorize the best solution achieved so far
             best_idx = np.argmax(self.emp_fits)
-            self.best = np.copy(self.employed[best_idx])
-            self.best_fit = self.emp_fits[best_idx]
+            if self.best_fit < self.emp_fits[best_idx]:
+                self.best = np.copy(self.employed[best_idx])
+                self.best_fit = self.emp_fits[best_idx]
             self.history_fit.append(self.best_fit)
 
         return 1 / self.best_fit
@@ -452,7 +453,7 @@ class GWO(fitness):
                 self.gb_fit = self.best_fit[0]
             self.history_fit.append(self.gb_fit)
 
-        return 1 / self.best_fit[0]
+        return 1 / self.gb_fit
 
 
 # HEIDARI A A, MIRJALILI S, FARIS H, et al.

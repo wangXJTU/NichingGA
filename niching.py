@@ -139,8 +139,9 @@ class nichingswarm(fitness):
                     self.pb[i] = np.copy(self.pop[i])
                     self.pb_fit[i] = self.fits[i]
             best_idx = np.argmax(self.pb_fit)
-            self.gb = np.copy(self.pb[best_idx])
-            self.gb_fit = self.pb_fit[best_idx]
+            if self.gb_fit < self.pb_fit[best_idx]:
+                self.gb = np.copy(self.pb[best_idx])
+                self.gb_fit = self.pb_fit[best_idx]
             self.history_fit.append(self.gb_fit)
         return 1 / self.gb_fit
 
